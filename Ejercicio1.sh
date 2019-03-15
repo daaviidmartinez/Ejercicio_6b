@@ -1,16 +1,19 @@
-
 #!/bin/bash
 
-numLineas=1
-totalLineas=$(cat nombres.txt | wc -l)
-n=$1
-
-while [ $numLineas -le $totalLineas ]; do
-        linea=$(head -n $numLineas nombres.txt | tail -n 1)
-        mkdir "$linea"
-        for i in `seq 1 1 $n`; do
-                mkdir "$linea/personal$i"
+f="nombres.txt"
+old=$IFS
+IFS=' 
+'
+for line in cat $f`
+do
+        mkdir $line
+        c2=0
+        while [ $c2 -le $1 ]
+        do
+                c2=$(expr $c2 + 1)
+                mkdir "$line/Personal$c2"
         done
-        numLineas=$(expr $numLineas + 1)
-
 done
+IFS=$old
+
+
